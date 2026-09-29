@@ -1435,12 +1435,19 @@
       const percentText = Math.floor(percent) + '%';
 
       let stripesStyle = '';
-      if (smallGoal > 0 && totalDisplayPrice > 0) {
-        const incrementPct = (smallGoal / totalDisplayPrice) * 100;
-        if (incrementPct > 0) {
-          stripesStyle = `background-image: repeating-linear-gradient(to right, transparent, transparent calc(${incrementPct}% - 1px), rgba(45, 40, 36, 0.15) calc(${incrementPct}% - 1px), rgba(45, 40, 36, 0.15) ${incrementPct}%);`;
-        }
-      }
+if (smallGoal > 0 && totalDisplayPrice > 0 && saved > 0) {
+  const incrementPct = (smallGoal / totalDisplayPrice) * 100;
+  // Only draw stripes if the increment is at least ~1% wide (otherwise invisible)
+  if (incrementPct >= 1) {
+    stripesStyle = `background-image: repeating-linear-gradient(
+      to right,
+      transparent,
+      transparent calc(${incrementPct}% - 1px),
+      rgba(45, 40, 36, 0.25) calc(${incrementPct}% - 1px),
+      rgba(45, 40, 36, 0.25) ${incrementPct}%
+    );`;
+  }
+}
 
       // Conditional block: only render the progress HTML if savings is greater than 0
       const progressHtml = saved > 0 ? `
