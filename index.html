@@ -1432,7 +1432,7 @@
       const saved = item.saved || 0;
       const smallGoal = item.smallGoal || 0;
       const percent = totalDisplayPrice > 0 ? Math.min(100, Math.max(0, (saved / totalDisplayPrice) * 100)) : 0;
-      const percentText = Math.floor(percent) + '%';
+      const percentText = percent.toFixed(2) + '%';
 
       if (smallGoal > 0 && totalDisplayPrice > 0) {
   const incrementPct = (smallGoal / totalDisplayPrice) * 100;
